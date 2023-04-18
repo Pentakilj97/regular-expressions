@@ -95,3 +95,46 @@ let datePattern2 = /^\d{1,2}\/\d{1,2}\/\d{4,}$/;  //il {4,} indica un numero min
 //visto che è una cosa comune è stato inventato un carattere speciale
 
 let datePattern3 = /^\d{1,2}\/\d{1,2}\/\d+$/;  //d+ significa almeno uno fino a infinito
+
+let datePatternAcDc = /^\d{1,2}\/\d{1,2}\/\d+ [ad]\.c\.$/;
+
+testRegex(datePatternAcDc, '25/12/37 a.c.');
+
+//il punto di domanda significa opzionalità
+
+console.log(/aaab?/.test("aaab")) //true
+console.log(/aaab?/.test("aab")) //false perchè la cosa opzionale si applica soltanto all'ultimo carattere. la terza a DEVE esserci
+console.log(/aaa[bc]?a/.test("aaaba")) //true
+
+//nelle espressioni regolari possiamo creare dei sottogruppi
+
+let datePattern4 = /^1\d{1,2}\/\d{1,2}\/\d+( [ad]\.c\.)?$/; //il sottogrupp è opzionale, ma se c'è deve essere fatto così, tutta l'espressione
+
+testRegex(datePattern4, '12/12/12 a.c.')
+
+//esercizietto in classe:
+
+let domainPatternTheInfamousPeposVersion = /^\w+(\-\w+)*([.:]\w+([(.\w+)(:\d+)])*)*$/;
+let domainPattern = /^[a-zA-Z\d][\w\-]*(\.[a-zA-Z]+)*(:\d+)?$/
+
+testRegex(domainPattern, 'google.com'); //true
+testRegex(domainPattern, 'localhost:8080'); //true
+testRegex(domainPattern, 'english-site.co.uk:21'); //true
+testRegex(domainPattern, 'localhost:') //false
+testRegex(domainPattern, 'personal-home-page.it') //true
+testRegex(domainPattern, '.page.it') //false
+testRegex(domainPattern, 'localhost') //true
+
+//per visualizzare logica delle regex sito debuggex
+
+//PATTERN DI SCELTA 
+
+//a differenza delle quadre, dove abbiamo alternative tra lettere [abc]
+//con | creo alternativa fra stringhe intere (pig|cat|chicken)s?
+//può essere pig, pigs, cow, cows, chicken, chickens
+
+//si possono rendere non case sensitive mettendo alla fine una i (opzione i)
+//ex let asdasd = /./i
+
+//con la u comprende anche i caratteri unicode, non gestiti bene dalle regEx (opzione u)
+//ex let dsasdasd = /./u
